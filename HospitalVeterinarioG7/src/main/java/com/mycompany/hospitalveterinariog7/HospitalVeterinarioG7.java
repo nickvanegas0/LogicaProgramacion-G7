@@ -106,6 +106,49 @@ public class HospitalVeterinarioG7 {
     
     private static void menuPacientes(Scanner scanner) {
         // menú para pacientes
+  
+        int opcion;
+        do {
+        System.out.println("Menú Pacientes:");
+            System.out.println("1. Ingresar nuevo paciente");
+            System.out.println("2. Mostrar lista de pacientes");
+            System.out.println("3. Calcular dias de paciente hospitalisado");
+            System.out.println("4. Numero de animales que llevan mas de X dias");
+            System.out.println("5. Mostrar pacientes por tipo");
+            System.out.println("6. Mostra pacientes en orden ascendente");
+            System.out.println("7. Volver al menú principal");
+            System.out.print("Selecciona una opción: ");
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            metodospaciente pacientemetodos = new metodospaciente();
+            
+            switch (opcion) {
+                case 1:
+                    pacientes = pacientemetodos.ingresarPaciente();
+                    break;
+                case 2:
+                    pacientemetodos.mostrarPacientes();
+                    break;
+                case 3:
+                    pacientemetodos.calcularDiasHospitalizados();
+                    break;
+                case 4:
+                    pacientemetodos.mostrarAnimalesConXDias();
+                    break;
+                case 5:
+                    pacientemetodos.mostrarPacientesPorTipo();
+                    break;
+                case 6: pacientemetodos.mostrarPacientes();
+                    break;
+                case 7:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida, intente de nuevo.");
+            }
+        } while (opcion != 7);
+        
     }
 
     private static void menuClientes(Scanner scanner) {

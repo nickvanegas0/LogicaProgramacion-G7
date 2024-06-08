@@ -20,7 +20,8 @@ public class Paciente { //hola
     private LocalDate fechaIngreso;
     private String idClientePropietario;
     private String numeroPoliza;
-
+    
+public Paciente(){}
     public Paciente(String identificacion, String nombre, String claseAnimal, String raza, String sexo, LocalDate fechaNacimiento, LocalDate fechaIngreso, String ClientePropietario, String numeroPoliza) {
         this.identificacion = identificacion;
         this.nombre = nombre;
@@ -29,12 +30,28 @@ public class Paciente { //hola
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaIngreso = fechaIngreso;
-        this.idClientePropietario = idClientePropietario;
+        this.idClientePropietario = ClientePropietario;
         this.numeroPoliza = numeroPoliza;
     }
 
     public long calcularDiasHospitalizado() {  
+        
        return 0;   
+    }
+    public String getIdentificacion (){
+        return identificacion;
+    }
+    public String getClase (){
+        return claseAnimal;
+    }
+    public String getRaza (){
+        return raza;
+    }
+    public String getNombre (){
+        return nombre;
+    }
+    public LocalDate getFechaIngreso (){
+        return fechaIngreso;
     }
     
 }
