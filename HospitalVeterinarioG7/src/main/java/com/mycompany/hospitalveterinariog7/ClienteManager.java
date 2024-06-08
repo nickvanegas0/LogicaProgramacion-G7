@@ -72,11 +72,24 @@ public class ClienteManager {
         System.out.println("El cliente de menor edad es: " + clienteMenorEdad.getNombre() + " " + clienteMenorEdad.getApellido());
     }
 
-    public void mostrarClienteConMasDeUnPaciente(List<Cliente> clientes) {
+    public void mostrarClienteConMasDeUnPaciente(List<Cliente> clientes, List<Paciente> pacientes) {
+        ArrayList<Integer> identificacionesMultiple = new ArrayList<>();        
         for (Cliente cliente : clientes) {
-            if (cliente.getNumeroDePacientes() > 1) {
-                System.out.println(cliente.getNombre() + " " + cliente.getApellido() + " tiene " + cliente.getNumeroDePacientes() + " pacientes.");
+            int cont = 0; 
+            int contpacientes = 0;
+            for (Paciente paciente : pacientes) {
+                if (paciente.getIdPropietario()== cliente.getIdentificacion()) {
+                    cont++;
+                    contpacientes++;
+                    if ((!identificacionesMultiple.contains(cliente.getIdentificacion())) && cont > 1){
+                        identificacionesMultiple.add(cliente.getIdentificacion());
+                    }
+                }                
             }
+            if(identificacionesMultiple.contains(cliente.getIdentificacion())){
+                    System.out.println(cliente.getNombre() + " " + cliente.getApellido() + " tiene " + contpacientes + " pacientes.");
+
+                }
         }
     }
 

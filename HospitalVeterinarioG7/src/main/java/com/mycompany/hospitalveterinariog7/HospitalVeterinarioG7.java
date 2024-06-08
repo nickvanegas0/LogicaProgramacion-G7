@@ -125,21 +125,21 @@ public class HospitalVeterinarioG7 {
             
             switch (opcion) {
                 case 1:
-                    pacientes = pacientemetodos.ingresarPaciente();
+                    pacientes = pacientemetodos.ingresarPaciente(pacientes);
                     break;
                 case 2:
-                    pacientemetodos.mostrarPacientes();
+                    pacientemetodos.mostrarPacientes(pacientes);
                     break;
                 case 3:
-                    pacientemetodos.calcularDiasHospitalizados();
+                    pacientemetodos.calcularDiasHospitalizados(pacientes);
                     break;
                 case 4:
-                    pacientemetodos.mostrarAnimalesConXDias();
+                    pacientemetodos.mostrarAnimalesConXDias(pacientes);
                     break;
                 case 5:
-                    pacientemetodos.mostrarPacientesPorTipo();
+                    pacientemetodos.mostrarPacientesPorTipo(pacientes);
                     break;
-                case 6: pacientemetodos.mostrarPacientes();
+                case 6: pacientemetodos.mostrarPacientes(pacientes);
                     break;
                 case 7:
                     System.out.println("Volviendo al menú principal...");
@@ -178,7 +178,7 @@ public class HospitalVeterinarioG7 {
                     clienteManager.mostrarClienteDeMenorEdad(clientes);
                     break;
                 case 4:
-                    clienteManager.mostrarClienteConMasDeUnPaciente(clientes);
+                    clienteManager.mostrarClienteConMasDeUnPaciente(clientes,pacientes);
                     break;
                 case 5:
                     clienteManager.mostrarCantidadDeClientesPorTipo(clientes);
@@ -198,6 +198,48 @@ public class HospitalVeterinarioG7 {
 
     private static void menuProveedores(Scanner scanner) {
         // menú para proveedores
+        int opcion;
+        do {
+        System.out.println("Menú Pacientes:");
+            System.out.println("1. Ingresar nuevo proveedor");
+            System.out.println("2. Mostrar lista de proveedores");
+            System.out.println("3. mostrar proveedor que mas compra");
+            System.out.println("4. Mostrar proveedores y valor a pagar");
+            System.out.println("5. Mostrar proveedores por tipo");
+            System.out.println("6. Mostra proveedores en orden ascendente");
+            System.out.println("7. Volver al menú principal");
+            System.out.print("Selecciona una opción: ");
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            MetodosProveedor metodosproveedor = new MetodosProveedor();
+            switch (opcion) {
+                case 1:
+                    proveedores = metodosproveedor.ingresarNuevoProveedor(scanner,proveedores);
+                    break;
+                case 2:
+                    metodosproveedor.mostrarTodosProveedores(proveedores);
+                    break;
+                case 3:
+                    metodosproveedor.mostrarProveedorMayorCompra(proveedores);
+                    break;
+                case 4:
+                    metodosproveedor.mostrarTodosProveedoresConCompra(proveedores);
+                    break;
+                case 5:
+                    metodosproveedor.mostrarProveedoresPorTipo(proveedores);
+                    break;
+                case 6: metodosproveedor.mostrarProveedoresOrdenado(proveedores);
+                    break;
+                case 7:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida, intente de nuevo.");
+            }
+            
+        }while(opcion != 7);
+        
     }
 
     private static void menuFacturas(Scanner scanner) {

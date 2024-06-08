@@ -13,19 +13,19 @@ import java.util.Comparator;
 import java.util.InputMismatchException;
         
 public class metodospaciente extends Paciente {
-    
-     private static List<Paciente> pacientes = new ArrayList<>();
+         
      public metodospaciente(){}
      
-     public metodospaciente(String identificacion, String nombre, String claseAnimal, String raza, String sexo, LocalDate fechaNacimiento, LocalDate fechaIngreso, String ClientePropietario, String numeroPoliza){
+     public metodospaciente(Integer identificacion, String nombre, String claseAnimal, String raza, String sexo, LocalDate fechaNacimiento, LocalDate fechaIngreso, Integer ClientePropietario, String numeroPoliza){
      super(identificacion, nombre, claseAnimal, raza, sexo, fechaNacimiento, fechaIngreso, ClientePropietario, numeroPoliza);
      }
-     public List<Paciente> ingresarPaciente() {
+     public List<Paciente> ingresarPaciente(List<Paciente> pacientes) {
         Scanner scanner = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         System.out.print("Ingrese la identificacion del paciente: ");
-        String id = scanner.nextLine();
-        if (existePaciente(id)) {
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+        if (existePaciente(id,pacientes)) {
             System.out.println("Paciente ya existe. Ingrese otra identificacion.");
             return pacientes;
         }
@@ -58,7 +58,8 @@ public class metodospaciente extends Paciente {
         
         
         System.out.print("Ingrese el identificador del cliente propietario: ");
-        String idCliente = scanner.nextLine();
+        Integer idCliente = scanner.nextInt();
+        scanner.nextLine();
        // Cliente cliente = buscarCliente(idCliente);
       //  if (cliente == null) {
       //      System.out.println("Cliente no encontrado.");
@@ -77,7 +78,7 @@ public class metodospaciente extends Paciente {
         return pacientes;
     }
 
-    private boolean existePaciente(String id) {
+    private boolean existePaciente(Integer id,List<Paciente> pacientes) {
         for (Paciente paciente : pacientes) {
             if (paciente.getIdentificacion().equals(id)) {
                 return true;
@@ -86,14 +87,14 @@ public class metodospaciente extends Paciente {
         return false;
     }
 
-    public void mostrarPacientes() {
-        ordenarPacientesPorDiasHospitalizados();
+    public void mostrarPacientes(List<Paciente> pacientes) {
+        ordenarPacientesPorDiasHospitalizados(pacientes);
         for (Paciente paciente : pacientes) {
             System.out.println(paciente.getIdentificacion() + " - " + paciente.getClase() + " - " + paciente.getRaza() + " - " + paciente.getNombre() + " - " + paciente.getFechaIngreso());
         }
     }
 
-    public void calcularDiasHospitalizados() {
+    public void calcularDiasHospitalizados(List<Paciente> pacientes) {
         for (Paciente paciente : pacientes) {
             int dias = calcularDias(paciente.getFechaIngreso());
             System.out.println(paciente.getIdentificacion() + " - " + paciente.getNombre() + " - " + dias + " dias - "); //+ paciente.getCliente().getNombre()); 
@@ -116,7 +117,7 @@ public class metodospaciente extends Paciente {
         return (int) dias;
     }
 
-    public void mostrarAnimalesConXDias() {
+    public void mostrarAnimalesConXDias(List<Paciente> pacientes) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el numero de dias: ");
         int dias = scanner.nextInt();
@@ -127,7 +128,7 @@ public class metodospaciente extends Paciente {
         }
     }
 
-    public void mostrarPacientesPorTipo() {
+    public void mostrarPacientesPorTipo(List<Paciente> pacientes) {
         ArrayList<String> tipos = new ArrayList<>();
         for (Paciente paciente : pacientes) {
             if (!tipos.contains(paciente.getClase())) {
@@ -146,7 +147,7 @@ public class metodospaciente extends Paciente {
         }
     }
 
-    public void ordenarPacientesPorDiasHospitalizados() {
+    public void ordenarPacientesPorDiasHospitalizados(List<Paciente> pacientes) {
         
         Collections.sort(pacientes, new Comparator<Paciente>(){        
             @Override

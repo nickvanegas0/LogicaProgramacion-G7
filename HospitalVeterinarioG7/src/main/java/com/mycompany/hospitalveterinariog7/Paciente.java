@@ -11,18 +11,18 @@ import java.time.LocalDate;
  * @author Estudiante 2
  */
 public class Paciente { //hola 
-    private String identificacion;
+    private Integer identificacion;
     private String nombre;
     private String claseAnimal;
     private String raza;
     private String sexo;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
-    private String idClientePropietario;
+    private Integer idClientePropietario;
     private String numeroPoliza;
     
 public Paciente(){}
-    public Paciente(String identificacion, String nombre, String claseAnimal, String raza, String sexo, LocalDate fechaNacimiento, LocalDate fechaIngreso, String ClientePropietario, String numeroPoliza) {
+    public Paciente(Integer identificacion, String nombre, String claseAnimal, String raza, String sexo, LocalDate fechaNacimiento, LocalDate fechaIngreso, Integer ClientePropietario, String numeroPoliza) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.claseAnimal = claseAnimal;
@@ -38,8 +38,11 @@ public Paciente(){}
         
        return 0;   
     }
-    public String getIdentificacion (){
+    public Integer getIdentificacion (){
         return identificacion;
+    }
+    public Integer getIdPropietario (){
+        return idClientePropietario;
     }
     public String getClase (){
         return claseAnimal;
