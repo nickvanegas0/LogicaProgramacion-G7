@@ -12,6 +12,7 @@ public class Proveedor extends Persona {
  
     private String tipoProveedor;
     private double valorTotalCompras;
+    private String ubiProveedor;
 
     public Proveedor(String identificacion, String nombre, String apellido, String direccion, String telefono, String tipoProveedor, double valorTotalCompras) {
         super(identificacion, nombre, apellido, direccion, telefono);
