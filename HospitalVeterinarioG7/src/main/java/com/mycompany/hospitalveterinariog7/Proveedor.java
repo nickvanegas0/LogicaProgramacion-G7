@@ -19,6 +19,11 @@ Punto para nota adicional del Estudiante 4:
 */
 package com.mycompany.hospitalveterinariog7;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+
 public class Proveedor extends Persona {
  
     public String tipoProveedor;
@@ -51,6 +56,100 @@ public class Proveedor extends Persona {
     
     public void setValorTotalCompras(double valorTotalCompras) {
         this.valorTotalCompras = valorTotalCompras;
+    }
+    
+    public static void mostrarTodosProveedores(List<Proveedor> proveedores) {
+        System.out.println("\n**Lista de proveedores**");
+
+        if (proveedores.isEmpty()) {
+            System.out.println("No hay proveedores registrados.");
+            return;
+        }
+        System.out.println("IDENTIFICACION | NOMBRE   | APELLIDO  | TELEFONO  |  DIRECCION  | TIPO  | TOTAL COMPRAS ");        
+        for (Proveedor proveedor : proveedores) {
+            
+            System.out.println( proveedor.identificacion + " | "+ proveedor.nombre  + " | " + proveedor.apellido + " | " + proveedor.telefono + " | " + proveedor.direccion + " | " + proveedor.tipoProveedor + " | " + proveedor.valorTotalCompras );
+        }
+    }
+    public static void mostrarProveedorMayorCompra(List<Proveedor> proveedores) {
+        Proveedor proveedorMayorCompra = null;
+        double mayorCompra = 0;
+
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getValorTotalCompras() > mayorCompra) {
+                mayorCompra = proveedor.getValorTotalCompras();
+                proveedorMayorCompra = proveedor;
+            }
+        }
+        if (proveedorMayorCompra != null) {
+            System.out.println("El Proveedor con mayor compra es:" + proveedorMayorCompra.nombre + " " + proveedorMayorCompra.apellido );
+        } else {
+            System.out.println("No se encuentran proveedores");
+        }                        
+    }
+    public static void mostrarTodosProveedoresConCompra(List<Proveedor> proveedores) {
+        System.out.println("\n**Lista de proveedores**");
+
+        if (proveedores.isEmpty()) {
+            System.out.println("No hay proveedores registrados.");
+            return;
+        }
+        System.out.println("IDENTIFICACION | NOMBRE   | APELLIDO  | TOTAL COMPRAS ");
+        for (Proveedor proveedor : proveedores) {
+            
+            System.out.println(proveedor.identificacion + " | "+ proveedor.nombre  + " | " + proveedor.apellido + " | " + proveedor.valorTotalCompras );
+        }
+    }
+    
+    public static void mostrarProveedoresPorTipo(List<Proveedor> proveedores) {
+        
+        if (proveedores.isEmpty()) {
+            System.out.println("No hay proveedores registrados.");
+            return;
+        }
+        ArrayList<String> tipos = new ArrayList<>();
+        for (Proveedor proveedor : proveedores) {
+            if (!tipos.contains(proveedor.getTipoProveedor())) {
+                tipos.add(proveedor.getTipoProveedor());
+            }
+        }
+
+        for (String tipo : tipos) {
+            int contador = 0;
+            for (Proveedor proveedor : proveedores) {
+                if (proveedor.getTipoProveedor().equals(tipo)) {
+                    contador++;
+                }
+            }
+            System.out.println("Tipo: " + tipo + " - Cantidad: " + contador);
+        }
+    }
+    
+    public static void mostrarProveedoresOrdenado(List<Proveedor> proveedores){
+    ordenarProveedores(proveedores);
+    
+    }
+    
+    
+    public static void ordenarProveedores(List<Proveedor> proveedores) {
+        
+        Collections.sort(proveedores, new Comparator<Proveedor>(){                    
+            @Override
+            public int compare(Proveedor o1, Proveedor o2) {
+                
+                return Double.compare(o1.getValorTotalCompras(),o2.getValorTotalCompras());
+            }
+        });
+        mostrarTodosProveedores(proveedores);
+        //Collections.sort(pacientes, (p1, p2) -> Integer.compare(calcularDias(p1.getFechaIngreso()), calcularDias(p2.getFechaIngreso())));
+    }
+    public static boolean existeProveedor(int idProveedor,List<Proveedor> proveedores) {
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getIdProveedor() == idProveedor) {
+                return true;
+            }
+        }
+        return false;
     }
            
 }

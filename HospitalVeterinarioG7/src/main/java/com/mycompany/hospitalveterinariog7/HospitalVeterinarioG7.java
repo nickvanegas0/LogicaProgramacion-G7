@@ -3,7 +3,10 @@
  */
 
 package com.mycompany.hospitalveterinariog7;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -121,25 +124,58 @@ public class HospitalVeterinarioG7 {
             opcion = scanner.nextInt();
             scanner.nextLine();
             
-            metodospaciente pacientemetodos = new metodospaciente();
+            
             
             switch (opcion) {
-                case 1:
-                    pacientes = pacientemetodos.ingresarPaciente(pacientes);
+                case 1:                    
+                    DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+                    System.out.print("Ingrese la identificacion del paciente: ");
+                    Integer id = scanner.nextInt();
+                    scanner.nextLine();
+                    if (Paciente.existePaciente(id,pacientes)) {
+                        System.out.println("Paciente ya existe. Ingrese otra identificacion.");                    
+                    }
+                    System.out.print("Ingrese el nombre del paciente: ");
+                    String nombre = scanner.nextLine();
+                    System.out.print("Ingrese la clase de animal: ");
+                    String clase = scanner.nextLine();
+                    System.out.print("Ingrese la raza: ");
+                    String raza = scanner.nextLine();
+                    System.out.print("Ingrese el sexo (M/F): ");
+                    String sexo = scanner.nextLine();
+                    System.out.print("Ingrese la fecha de nacimiento (yyyy-mm-dd): ");
+                    String fechaNacimiento = scanner.nextLine();                       
+                    LocalDate nacimiento = LocalDate.parse(fechaNacimiento, formatter);
+                    System.out.print("Ingrese la fecha de ingreso (yyyy-mm-dd): ");
+                    String fechaIngreso = scanner.nextLine();
+                    LocalDate ingreso = LocalDate.parse(fechaIngreso, formatter);
+                    System.out.print("Ingrese el identificador del cliente propietario: ");
+                    Integer idCliente = scanner.nextInt();
+                    scanner.nextLine();       
+                    System.out.print("Ingrese el numero de poliza (si tiene una, de lo contrario escriba no aplica): ");
+                    String poliza = "";
+                    try {
+                        poliza = scanner.next();
+                    } catch (InputMismatchException e) {
+                        scanner.nextLine();     
+                    }
+                    Paciente paciente = new Paciente(id, nombre, clase, raza, sexo, nacimiento, ingreso, idCliente, poliza);
+                    pacientes.add(paciente);
+                    System.out.println("Paciente ingresado con exito.");
                     break;
                 case 2:
-                    pacientemetodos.mostrarPacientes(pacientes);
+                    Paciente.mostrarPacientes(pacientes);
                     break;
                 case 3:
-                    pacientemetodos.calcularDiasHospitalizados(pacientes);
+                    Paciente.calcularDiasHospitalizados(pacientes);
                     break;
                 case 4:
-                    pacientemetodos.mostrarAnimalesConXDias(pacientes);
+                    Paciente.mostrarAnimalesConXDias(scanner,pacientes);
                     break;
                 case 5:
-                    pacientemetodos.mostrarPacientesPorTipo(pacientes);
+                    Paciente.mostrarPacientesPorTipo(pacientes);
                     break;
-                case 6: pacientemetodos.mostrarPacientes(pacientes);
+                case 6: Paciente.mostrarPacientes(pacientes);
                     break;
                 case 7:
                     System.out.println("Volviendo al menú principal...");
@@ -211,25 +247,54 @@ public class HospitalVeterinarioG7 {
             System.out.print("Selecciona una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine();
-            
-            MetodosProveedor metodosproveedor = new MetodosProveedor();
+                        
             switch (opcion) {
                 case 1:
-                    metodosproveedor.ingresarNuevoProveedor(scanner,proveedores);
+                    System.out.println("\n**Ingreso de nuevo proveedor**");
+                    int idProveedor;
+                    String nombre, apellido, telefono, direccion, tipoProveedor;
+                    double valorCompras = 0;
+
+                    System.out.print("Ingrese ID del proveedor: ");
+                    idProveedor = scanner.nextInt();      
+                    if (Proveedor.existeProveedor(idProveedor,proveedores)) {
+                        System.out.println("Proveedor con ID " + idProveedor + " ya existe. Intente nuevamente.");  
+                        break;
+                    }
+                    scanner.nextLine();
+                    System.out.print("Ingrese nombre: ");
+                    nombre = scanner.nextLine();
+                    System.out.print("Ingrese apellido: ");
+                    apellido = scanner.nextLine();
+                    System.out.print("Ingrese teléfono: ");
+                    telefono = scanner.nextLine();
+                    System.out.print("Ingrese dirección: ");
+                    direccion = scanner.nextLine();
+                    System.out.print("Ingrese tipo de proveedor: ");
+                    tipoProveedor = scanner.nextLine();
+                    try {
+                        System.out.print("Ingrese valor total de compras: (separador de milesimas con ,)");            
+                        valorCompras = scanner.nextDouble();        
+                    } catch (Exception e) {
+                        System.out.print("Valor incorrecto");
+                    }
+                    Proveedor nuevoProveedor = new Proveedor(idProveedor, nombre, apellido, telefono, direccion, tipoProveedor, valorCompras);
+                    proveedores.add(nuevoProveedor);
+                    System.out.println("Proveedor ingresado correctamente.");
                     break;
                 case 2:
-                    metodosproveedor.mostrarTodosProveedores(proveedores);
+                    Proveedor.mostrarTodosProveedores(proveedores);
                     break;
                 case 3:
-                    metodosproveedor.mostrarProveedorMayorCompra(proveedores);
+                    Proveedor.mostrarProveedorMayorCompra(proveedores);
                     break;
                 case 4:
-                    metodosproveedor.mostrarTodosProveedoresConCompra(proveedores);
+                    Proveedor.mostrarTodosProveedoresConCompra(proveedores);
                     break;
                 case 5:
-                    metodosproveedor.mostrarProveedoresPorTipo(proveedores);
+                    Proveedor.mostrarProveedoresPorTipo(proveedores);
                     break;
-                case 6: metodosproveedor.mostrarProveedoresOrdenado(proveedores);
+                case 6: Proveedor.mostrarProveedoresOrdenado(proveedores);
                     break;
                 case 7:
                     System.out.println("Volviendo al menú principal...");
