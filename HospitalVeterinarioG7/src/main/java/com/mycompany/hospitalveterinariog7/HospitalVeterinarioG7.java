@@ -152,7 +152,48 @@ public class HospitalVeterinarioG7 {
     }
 
     private static void menuClientes(Scanner scanner) {
-        // menú para clientes
+        int opcion;
+
+        do{
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Ingresar nuevo cliente");
+            System.out.println("2. Mostrar todos los clientes almacenados");
+            System.out.println("3. Calcular y mostrar el nombre y el apellido del cliente de menor edad");
+            System.out.println("4. Mostrar la lista de los clientes que tienen más de un paciente");
+            System.out.println("5. Mostrar cuantos clientes hay por cada tipo");
+            System.out.println("6. Salir");
+            System.out.println("7. Mostrar la lista de los clientes y la cantidad de pacientes, en orden descendente");
+
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea
+            ClienteManager clienteManager = new ClienteManager();       
+            switch (opcion) {
+                case 1:
+                    clientes = clienteManager.ingresarNuevoCliente(scanner, clientes);
+                    break;
+                case 2:
+                    clienteManager.mostrarTodosLosClientes(clientes);
+                    break;
+                case 3:
+                    clienteManager.mostrarClienteDeMenorEdad(clientes);
+                    break;
+                case 4:
+                    clienteManager.mostrarClienteConMasDeUnPaciente(clientes);
+                    break;
+                case 5:
+                    clienteManager.mostrarCantidadDeClientesPorTipo(clientes);
+                    break;
+                case 6:
+                    System.out.println("Adiós!");
+                    break;
+                case 7:
+                    clienteManager.mostrarClientesOrdenadosPorPacientes(clientes);
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    break;
+            }
+        } while (opcion != 6);// menú para clientes
     }
 
     private static void menuProveedores(Scanner scanner) {
