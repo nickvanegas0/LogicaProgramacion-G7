@@ -1,18 +1,29 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+    Estudiante Johan Nicolas Vanegas Millan
+Programa: 650506003-3
+
+De cada proveedor se almacena la identificación, nombre, apellido,  teléfono, dirección, (atributos clase persona) y además se quiere almacenar el tipo de proveedor y el valor total de las compras que se le ha realizado. 
+
+Se requiere realizar un menú con las siguientes opciones:
+1. Ingresar nuevo proveedor (si el proveedor ya existe se debe informar y pedir otra identificación)
+2. Mostrar todos los proveedores almacenados.
+3. Calcular y mostrar el nombre completo del proveedor al que más se le ha comprado (en valor por pagar)
+4. Mostrar una lista de todos los proveedores y el valor a pagar por compras  
+5. Mostrar cuantos proveedores hay por cada tipo. Se muestra el tipo y la cantidad de proveedores 
+6. Salir.
+
+
+Punto para nota adicional del Estudiante 4: 
+4a. Mostrar la lista de los proveedores, de forma ordenada,  de menor a mayor según el valor por pagar
+
+*/
 package com.mycompany.hospitalveterinariog7;
 
-/**
- *
- * @author Estudiante 4
- */
 public class Proveedor extends Persona {
  
-    private String tipoProveedor;
-    private double valorTotalCompras;
-    private String ubiProveedor;
+    public String tipoProveedor;
+    public double valorTotalCompras;
+    
     
     
     public Proveedor () {}
@@ -41,17 +52,5 @@ public class Proveedor extends Persona {
     public void setValorTotalCompras(double valorTotalCompras) {
         this.valorTotalCompras = valorTotalCompras;
     }
-
-    
-    public String getUbiProveedor() {
-        return ubiProveedor;
-    }
-
-    public void setUbiProveedor(String ubiProveedor) {
-        this.ubiProveedor = ubiProveedor;
-    }
-
-
-
-       
+           
 }

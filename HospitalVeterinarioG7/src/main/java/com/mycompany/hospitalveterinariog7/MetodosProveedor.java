@@ -1,4 +1,22 @@
+/*
+    Estudiante Johan Nicolas Vanegas Millan
+Programa: 650506003-3
 
+De cada proveedor se almacena la identificación, nombre, apellido,  teléfono, dirección, (atributos clase persona) y además se quiere almacenar el tipo de proveedor y el valor total de las compras que se le ha realizado. 
+
+Se requiere realizar un menú con las siguientes opciones:
+1. Ingresar nuevo proveedor (si el proveedor ya existe se debe informar y pedir otra identificación)
+2. Mostrar todos los proveedores almacenados.
+3. Calcular y mostrar el nombre completo del proveedor al que más se le ha comprado (en valor por pagar)
+4. Mostrar una lista de todos los proveedores y el valor a pagar por compras  
+5. Mostrar cuantos proveedores hay por cada tipo. Se muestra el tipo y la cantidad de proveedores 
+6. Salir.
+
+
+Punto para nota adicional del Estudiante 4: 
+4a. Mostrar la lista de los proveedores, de forma ordenada,  de menor a mayor según el valor por pagar
+
+*/
 package com.mycompany.hospitalveterinariog7;
 
 import java.util.ArrayList;
@@ -13,12 +31,12 @@ import java.util.List;
 public class MetodosProveedor {
     
     
-    public static List<Proveedor> ingresarNuevoProveedor(Scanner scanner, List<Proveedor> proveedores) {
+    public List<Proveedor> ingresarNuevoProveedor(Scanner scanner, List<Proveedor> proveedores) {
         System.out.println("\n**Ingreso de nuevo proveedor**");
 
         int idProveedor;
         String nombre, apellido, telefono, direccion, tipoProveedor;
-        double valorCompras;
+        double valorCompras = 0;
 
         System.out.print("Ingrese ID del proveedor: ");
         idProveedor = scanner.nextInt();      
@@ -26,7 +44,7 @@ public class MetodosProveedor {
             System.out.println("Proveedor con ID " + idProveedor + " ya existe. Intente nuevamente.");
             return proveedores;
         }
-
+        scanner.nextLine();
         System.out.print("Ingrese nombre: ");
         nombre = scanner.nextLine();
         System.out.print("Ingrese apellido: ");
@@ -37,8 +55,12 @@ public class MetodosProveedor {
         direccion = scanner.nextLine();
         System.out.print("Ingrese tipo de proveedor: ");
         tipoProveedor = scanner.nextLine();
-        System.out.print("Ingrese valor total de compras: ");
+        try {
+        System.out.print("Ingrese valor total de compras: (separador de milesimas con ,)");            
         valorCompras = scanner.nextDouble();        
+        } catch (Exception e) {
+            System.out.print("Valor incorrecto");
+        }
 
         Proveedor nuevoProveedor = new Proveedor(idProveedor, nombre, apellido, telefono, direccion, tipoProveedor, valorCompras);
         proveedores.add(nuevoProveedor);
@@ -62,9 +84,10 @@ public class MetodosProveedor {
             System.out.println("No hay proveedores registrados.");
             return;
         }
-
+        System.out.println("IDENTIFICACION | NOMBRE   | APELLIDO  | TELEFONO  |  DIRECCION  | TIPO  | TOTAL COMPRAS ");        
         for (Proveedor proveedor : proveedores) {
-            System.out.println(proveedor);
+            
+            System.out.println( proveedor.identificacion + " | "+ proveedor.nombre  + " | " + proveedor.apellido + " | " + proveedor.telefono + " | " + proveedor.direccion + " | " + proveedor.tipoProveedor + " | " + proveedor.valorTotalCompras );
         }
     }
 
@@ -78,6 +101,13 @@ public class MetodosProveedor {
                 proveedorMayorCompra = proveedor;
             }
         }
+        if (proveedorMayorCompra != null) {
+            System.out.println("El Proveedor con mayor compra es:" + proveedorMayorCompra.nombre + " " + proveedorMayorCompra.apellido );
+        } else {
+            System.out.println("No se encuentran proveedores");
+        }                    
+        
+        
 
     }     
     
@@ -88,9 +118,10 @@ public class MetodosProveedor {
             System.out.println("No hay proveedores registrados.");
             return;
         }
-
+        System.out.println("IDENTIFICACION | NOMBRE   | APELLIDO  | TOTAL COMPRAS ");
         for (Proveedor proveedor : proveedores) {
-            System.out.println(proveedor);
+            
+            System.out.println(proveedor.identificacion + " | "+ proveedor.nombre  + " | " + proveedor.apellido + " | " + proveedor.valorTotalCompras );
         }
     }
     
@@ -136,6 +167,7 @@ public class MetodosProveedor {
                 return Double.compare(o1.getValorTotalCompras(),o2.getValorTotalCompras());
             }
         });
+        mostrarTodosProveedores(proveedores);
         //Collections.sort(pacientes, (p1, p2) -> Integer.compare(calcularDias(p1.getFechaIngreso()), calcularDias(p2.getFechaIngreso())));
     }
 }

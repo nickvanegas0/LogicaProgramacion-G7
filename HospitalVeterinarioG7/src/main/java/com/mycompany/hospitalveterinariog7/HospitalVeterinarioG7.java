@@ -200,7 +200,7 @@ public class HospitalVeterinarioG7 {
         // menú para proveedores
         int opcion;
         do {
-        System.out.println("Menú Pacientes:");
+        System.out.println("Menú Proveedores:");
             System.out.println("1. Ingresar nuevo proveedor");
             System.out.println("2. Mostrar lista de proveedores");
             System.out.println("3. mostrar proveedor que mas compra");
@@ -215,7 +215,7 @@ public class HospitalVeterinarioG7 {
             MetodosProveedor metodosproveedor = new MetodosProveedor();
             switch (opcion) {
                 case 1:
-                    proveedores = metodosproveedor.ingresarNuevoProveedor(scanner,proveedores);
+                    metodosproveedor.ingresarNuevoProveedor(scanner,proveedores);
                     break;
                 case 2:
                     metodosproveedor.mostrarTodosProveedores(proveedores);
