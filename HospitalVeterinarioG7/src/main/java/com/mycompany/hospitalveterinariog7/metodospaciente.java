@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
         
 public class metodospaciente extends Paciente {
@@ -21,29 +22,43 @@ public class metodospaciente extends Paciente {
      }
      public List<Paciente> ingresarPaciente() {
         Scanner scanner = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         System.out.print("Ingrese la identificacion del paciente: ");
-        String id = scanner.next();
+        String id = scanner.nextLine();
         if (existePaciente(id)) {
             System.out.println("Paciente ya existe. Ingrese otra identificacion.");
             return pacientes;
         }
         System.out.print("Ingrese el nombre del paciente: ");
-        String nombre = scanner.next();
+        String nombre = scanner.nextLine();
+        
+        
         System.out.print("Ingrese la clase de animal: ");
-        String clase = scanner.next();
+        String clase = scanner.nextLine();
+        
+        
         System.out.print("Ingrese la raza: ");
-        String raza = scanner.next();
+        String raza = scanner.nextLine();
+        
+        
         System.out.print("Ingrese el sexo (M/F): ");
-        String sexo = scanner.next();
+        String sexo = scanner.nextLine();
+        
+        
         System.out.print("Ingrese la fecha de nacimiento (yyyy-mm-dd): ");
-        String fechaNacimiento = scanner.next();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        String fechaNacimiento = scanner.nextLine();
+        
+                
         LocalDate nacimiento = LocalDate.parse(fechaNacimiento, formatter);
+        
+        
         System.out.print("Ingrese la fecha de ingreso (yyyy-mm-dd): ");
-        String fechaIngreso = scanner.next();
+        String fechaIngreso = scanner.nextLine();
         LocalDate ingreso = LocalDate.parse(fechaIngreso, formatter);
+        
+        
         System.out.print("Ingrese el identificador del cliente propietario: ");
-        String idCliente = scanner.next();
+        String idCliente = scanner.nextLine();
        // Cliente cliente = buscarCliente(idCliente);
       //  if (cliente == null) {
       //      System.out.println("Cliente no encontrado.");
@@ -132,7 +147,14 @@ public class metodospaciente extends Paciente {
     }
 
     public void ordenarPacientesPorDiasHospitalizados() {
-        Collections.sort(pacientes, (p1, p2) -> Integer.compare(calcularDias(p1.getFechaIngreso()), calcularDias(p2.getFechaIngreso())));
+        
+        Collections.sort(pacientes, new Comparator<Paciente>(){        
+            @Override
+            public int compare(Paciente p1, Paciente p2) {
+                return p1.getFechaIngreso().compareTo(p2.getFechaIngreso());
+            }
+        });
+        //Collections.sort(pacientes, (p1, p2) -> Integer.compare(calcularDias(p1.getFechaIngreso()), calcularDias(p2.getFechaIngreso())));
     }
 
     //private Cliente buscarCliente(String id) {
@@ -144,3 +166,4 @@ public class metodospaciente extends Paciente {
       //  return null;
   //  }
 }
+
