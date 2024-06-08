@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author Estudiante 2
  */
-public class Paciente {
+public class Paciente { //hola 
     private String identificacion;
     private String nombre;
     private String claseAnimal;
