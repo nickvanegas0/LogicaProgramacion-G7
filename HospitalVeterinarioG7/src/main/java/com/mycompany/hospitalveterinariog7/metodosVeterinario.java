@@ -12,8 +12,10 @@ import java.util.Scanner;
 public class metodosVeterinario extends Veterinario{
     
     private static List<Veterinario> veterinarios = new ArrayList<>();
-
-    public metodosVeterinario(String identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, String horasTrabajadas) {
+    
+    public metodosVeterinario(){}
+    
+    public metodosVeterinario(Integer identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, String horasTrabajadas) {
         super(identificacion, nombre, apellido, direccion, telefono, edad, sexo, especialidad, turno, tituloProfesional, horasTrabajadas);
     }
 

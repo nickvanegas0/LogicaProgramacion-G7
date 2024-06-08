@@ -22,7 +22,7 @@ class Veterinario extends Persona{
     public Veterinario(){  
     }
  
-    public Veterinario(String identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, String horasTrabajadas) {
+    public Veterinario(Integer identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, String horasTrabajadas) {
         super(identificacion, nombre, apellido, direccion, telefono);
     }
 
@@ -74,11 +74,11 @@ class Veterinario extends Persona{
         this.horasTrabajadas = horasTrabajadas;
     }
 
-    public String getIdentificacion() {
+    public Integer getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(Integer identificacion) {
         this.identificacion = identificacion;
     }
 

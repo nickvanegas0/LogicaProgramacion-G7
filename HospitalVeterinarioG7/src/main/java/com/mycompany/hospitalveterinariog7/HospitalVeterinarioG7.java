@@ -74,7 +74,7 @@ public class HospitalVeterinarioG7 {
             System.out.print("Selecciona una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-            metodosVeterinario metodosveterinario = new metodosVeterinario("", "", "", "", "", "", "", "", "", "", "");
+            metodosVeterinario metodosveterinario = new metodosVeterinario();
          
             switch (opcion) {
                 case 1:

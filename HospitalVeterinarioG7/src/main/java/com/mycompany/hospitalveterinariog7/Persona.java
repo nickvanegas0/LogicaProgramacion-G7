@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Estudiante 3
  */
 class Persona {
-    String identificacion;
+    Integer identificacion;
     String nombre;
     String apellido;
     String direccion;
@@ -19,7 +19,7 @@ class Persona {
     }
 
     // Constructor
-    public Persona(String identificacion, String nombre, String apellido, String direccion, String telefono) {
+    public Persona(Integer identificacion, String nombre, String apellido, String direccion, String telefono) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,7 +31,7 @@ class Persona {
     public void displayPersona() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese Identificación:");
-        identificacion = scanner.nextLine();
+        identificacion = scanner.nextInt();
         System.out.println("Ingrese Nombre:");
         nombre = scanner.nextLine();
         System.out.println("Ingrese Apellido:");
