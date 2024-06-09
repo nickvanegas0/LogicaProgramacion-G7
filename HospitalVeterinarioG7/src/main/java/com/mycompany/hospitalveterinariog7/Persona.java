@@ -31,7 +31,8 @@ class Persona {
     public void displayPersona() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese Identificación:");
-        identificacion = scanner.nextInt();
+        identificacion = scanner.nextInt(); 
+        scanner.nextLine();
         System.out.println("Ingrese Nombre:");
         nombre = scanner.nextLine();
         System.out.println("Ingrese Apellido:");

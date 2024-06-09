@@ -17,13 +17,19 @@ class Veterinario extends Persona{
     String especialidad;
     String turno;
     String tituloProfesional;
-    String horasTrabajadas;
+    Integer horasTrabajadas;
     
     public Veterinario(){  
     }
  
-    public Veterinario(Integer identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, String horasTrabajadas) {
+    public Veterinario(Integer identificacion, String nombre, String apellido, String direccion, String telefono, String edad, String sexo, String especialidad, String turno, String  tituloProfesional, Integer horasTrabajadas) {
         super(identificacion, nombre, apellido, direccion, telefono);
+        this.edad = edad;
+        this.sexo = sexo;
+        this.especialidad = especialidad;
+        this.turno = turno;
+        this.tituloProfesional = tituloProfesional;
+        this.horasTrabajadas = horasTrabajadas;
     }
 
     public String getEdad() {
@@ -66,11 +72,11 @@ class Veterinario extends Persona{
         this.tituloProfesional = tituloProfesional;
     }
 
-    public String getHorasTrabajadas() {
+    public Integer getHorasTrabajadas() {
         return horasTrabajadas;
     }
 
-    public void setHorasTrabajadas(String horasTrabajadas) {
+    public void setHorasTrabajadas(Integer horasTrabajadas) {
         this.horasTrabajadas = horasTrabajadas;
     }
 

@@ -95,13 +95,13 @@ public class HospitalVeterinarioG7 {
                     metodosveterinario.mostrarListaVeterinarios(veterinarios);
                     break;
                 case 3:
-                    metodosveterinario.calcularSalario(scanner);
+                    metodosveterinario.calcularSalario(scanner, veterinarios);
                     break;
                 case 4:
-                    metodosveterinario.mostrarVeterinarioMasExperiencia();
+                    metodosveterinario.mostrarVeterinarioMasExperiencia(veterinarios);
                     break;
                 case 5:
-                    metodosveterinario.mostrarVeterinariosPorTurno();
+                    metodosveterinario.mostrarVeterinariosPorTurno(veterinarios);
                     break;
                 case 6:
                     System.out.println("Volviendo al menú principal...");
