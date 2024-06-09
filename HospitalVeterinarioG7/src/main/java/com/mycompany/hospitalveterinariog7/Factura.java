@@ -11,15 +11,32 @@ import java.util.Random;
  * @author Estudiante 5
  */
 class Factura {
-    private static int contadorFacturas = new Random().nextInt(100) + 1;
+    private static int nextNumero = new Random().nextInt(100) + 1;
     private int numero;
     private Paciente paciente;
-    private double valorHospitalizacion;
+    private double valor;
 
-    public Factura(Paciente paciente, double valorHospitalizacion) {
-        this.numero = contadorFacturas++;
+    public Factura(Paciente paciente, double valor) {
+        this.numero = nextNumero++;
         this.paciente = paciente;
-        this.valorHospitalizacion = valorHospitalizacion;
+        this.valor = valor;
+    }
+
+    // Getters y setters
+    public int getNumero() {
+        return numero;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
 }

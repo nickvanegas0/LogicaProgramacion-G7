@@ -16,14 +16,20 @@ import java.util.Scanner;
  * @author nicol
  */
 public class HospitalVeterinarioG7 {
-    
+   
     private static List<Veterinario> veterinarios = new ArrayList<>();
     private static List<Paciente> pacientes = new ArrayList<>();
     private static List<Cliente> clientes = new ArrayList<>();
     private static List<Proveedor> proveedores = new ArrayList<>();
     private static List<Factura> facturas = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
 
     public static void main(String[] args) {
+
+         pacientes.add(new Paciente(123, "Paciente 1", "Perro", "Labrador", "Macho", LocalDate.of(2020, 1, 1), LocalDate.of(2023, 1, 1), 1, "Poliza1"));
+        pacientes.add(new Paciente(124, "Paciente 2", "Gato", "Siames", "Hembra", LocalDate.of(2021, 5, 10), LocalDate.of(2023, 2, 1), 2, "Poliza2"));
+
         Scanner scanner = new Scanner(System.in);
         int opcion;
         do {
@@ -338,7 +344,82 @@ public class HospitalVeterinarioG7 {
         
     }
 
-    private static void menuFacturas(Scanner scanner) {
-        // menú para facturas
+     private static void menuFacturas(Scanner scanner) {
+        int opcion;
+        do {
+            mostrarMenuFacturas();
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            switch (opcion) {
+                case 1:
+                    generarFactura();
+                    break;
+                case 2:
+                    generarTodasLasFacturas();
+                    break;
+                case 3:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
+        } while (opcion != 3);
+    }
+
+    private static void mostrarMenuFacturas() {
+        System.out.println("Menú de Facturas:");
+        System.out.println("1. Generar factura");
+        System.out.println("2. Generar todas las facturas");
+        System.out.println("3. Volver al menú principal");
+        System.out.print("Seleccione una opción: ");
+    }
+
+ private static void generarFactura() {
+        System.out.print("Ingrese el identificador del paciente: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        Paciente paciente = buscarPacientePorId(id);
+
+        if (paciente == null) {
+            System.out.println("Paciente no encontrado. Intente nuevamente.");
+            return;
+        }
+
+        System.out.print("Ingrese el valor general de hospitalización por noche: ");
+        double valorGeneral = Double.parseDouble(scanner.nextLine());
+
+        long diasHospitalizacion = paciente.calcularDiasHospitalizado();
+        double valorTotal = paciente.getNumeroPoliza() != null ? valorGeneral * diasHospitalizacion * 0.8 : valorGeneral * diasHospitalizacion;
+
+        Factura factura = new Factura(paciente, valorTotal);
+        facturas.add(factura);
+
+        System.out.println("Factura generada:");
+        System.out.println("Identificador: " + paciente.getIdentificacion());
+        System.out.println("Nombre: " + paciente.getNombre());
+        System.out.println("Fecha de ingreso: " + paciente.getFechaIngreso());
+        System.out.println("Noches de hospitalización: " + diasHospitalizacion);
+        System.out.println("Valor adeudado: " + factura.getValor());
+    }
+
+    private static void generarTodasLasFacturas() {
+        System.out.println("Listado de todas las facturas:");
+        for (Factura factura : facturas) {
+            System.out.println("Número de factura: " + factura.getNumero());
+            System.out.println("Identificador del paciente: " + factura.getPaciente().getIdentificacion());
+            System.out.println("Nombre del paciente: " + factura.getPaciente().getNombre());
+            System.out.println("Valor adeudado: " + factura.getValor());
+            System.out.println("--------------");
+        }
+    }
+
+    public static Paciente buscarPacientePorId(int id) {
+        for (Paciente paciente : pacientes) {
+            if (paciente.getIdentificacion() == id) {
+                return paciente;
+            }
+        }
+        return null; // Paciente no encontrado
     }
 }

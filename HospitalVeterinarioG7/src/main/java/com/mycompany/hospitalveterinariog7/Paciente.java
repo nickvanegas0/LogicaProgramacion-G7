@@ -5,6 +5,7 @@
 package com.mycompany.hospitalveterinariog7;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,9 +40,19 @@ public Paciente(){}
         this.numeroPoliza = numeroPoliza;
     }
 
-    
+     public long calcularDiasHospitalizado() {
+        return ChronoUnit.DAYS.between(fechaIngreso, LocalDate.now());
+    }
     public Integer getIdentificacion(){
         return identificacion;
+    }
+
+    
+    public String getNumeroPoliza() {
+        return numeroPoliza;
+    }
+    public void setNumeroPoliza(String numeroPoliza) {
+        this.numeroPoliza = numeroPoliza;
     }
     public Integer getIdPropietario (){
         return idClientePropietario;
