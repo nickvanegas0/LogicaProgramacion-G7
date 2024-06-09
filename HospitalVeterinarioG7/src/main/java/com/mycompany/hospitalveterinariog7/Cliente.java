@@ -1,5 +1,23 @@
 package com.mycompany.hospitalveterinariog7;
 
+/*
+Autor: DIEGO AARON LUNA RESTREPO
+
+Estudiante 3
+De cada cliente se almacena la identificación, nombre, apellido, dirección y teléfono (atributos clase persona) y además se quiere almacenar el tipo de cliente (persona natural o jurídica) y la fecha de nacimiento.
+ 
+Se requiere realizar un menú con las siguientes opciones:
+1. Ingresar nuevo cliente (si el cliente ya existe se debe informar y pedir otra identificación)
+2. Mostrar todos los clientes almacenados.
+3. Calcular y mostrar el nombre y el apellido del cliente de menor edad.
+4. Mostrar la lista de los clientes que tienen más de un paciente. 
+5. Mostrar cuantos clientes hay por cada tipo. Se muestra el tipo y la cantidad de clientes 
+6. Salir
+
+Punto para nota adicional del Estudiante 3: 
+3a. Mostrar la lista de los clientes y la cantidad de pacientes, en orden descendente (del que más pacientes tiene al que menos) 
+
+*/
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -7,10 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author Estudiante 3
- */
+
 public class Cliente extends Persona {
     private String tipo;
     private Date fechaNacimiento;

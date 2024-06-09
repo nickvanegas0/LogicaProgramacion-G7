@@ -1,8 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.hospitalveterinariog7;
+
+/*
+AUTOR: JUAN JOSE MOLINA URBAEZ
+
+Estudiante 2
+De cada paciente se almacena la identificación, nombre, clase de animal, raza,  sexo, la fecha de nacimiento, la fecha de ingreso, el identificador del cliente propietario y el número de póliza (si tiene una). 
+
+Se requiere realizar un menú con las siguientes opciones:
+1. Ingresar nuevo paciente (si ya existe se debe informar y pedir otra identificación)
+2. Mostrar una lista de todos los pacientes almacenados, en cada línea la identificación, la clase, la raza, el nombre completo, y la fecha de ingreso.
+3. Calcular y mostrar el número de días que lleva cada paciente hospitalizado (se muestra el identificador, el nombre, el número de días hospitalizado y el nombre del cliente (debe hacer uso de los métodos de la clase cliente)
+4. Calcular y mostrar el nombre de los animales, la clase y raza, que llevan más de un número dado de días.
+5. Mostrar cuántos pacientes hay por cada tipo. 
+6. Salir
+
+Punto para nota adicional Estudiante 2: 
+2a. Mostrar la lista de los pacientes y el número de días de hospitalización, en orden ascendente, del que menos lleva al que más. 
+
+
+*/
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
