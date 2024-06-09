@@ -3,9 +3,11 @@
  */
 
 package com.mycompany.hospitalveterinariog7;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -134,6 +136,7 @@ public class HospitalVeterinarioG7 {
                     scanner.nextLine();
                     if (Paciente.existePaciente(id,pacientes)) {
                         System.out.println("Paciente ya existe. Ingrese otra identificacion.");                    
+                        break;
                     }
                     System.out.print("Ingrese el nombre del paciente: ");
                     String nombre = scanner.nextLine();
@@ -201,29 +204,57 @@ public class HospitalVeterinarioG7 {
             System.out.println("7. Mostrar la lista de los clientes y la cantidad de pacientes, en orden descendente");
 
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
-            ClienteManager clienteManager = new ClienteManager();       
+            scanner.nextLine(); // Consumir el salto de línea            
             switch (opcion) {
-                case 1:
-                    clientes = clienteManager.ingresarNuevoCliente(scanner, clientes);
+                case 1:                    
+                    System.out.println("Ingrese la identificación del cliente:");
+                    Integer identificacion = scanner.nextInt();
+
+                    if (Cliente.existeCliente(identificacion, clientes)) {
+                        System.out.println("Cliente ya existe. Ingrese otra identificacion.");
+                    break;
+                    }
+                    scanner.nextLine ();
+                    System.out.println("Ingrese el nombre del cliente:");
+                    String nombre = scanner.nextLine();
+                    System.out.println("Ingrese el apellido del cliente:");
+                    String apellido = scanner.nextLine();
+                    System.out.println("Ingrese la dirección del cliente:");
+                    String direccion = scanner.nextLine();
+                    System.out.println("Ingrese el teléfono del cliente:");
+                    String telefono = scanner.nextLine();
+                    System.out.println("Ingrese el tipo de cliente (natural o jurídica):");
+                    String tipo = scanner.nextLine();
+                    System.out.println("Ingrese la fecha de nacimiento (dd/MM/yyyy):");
+                    String fechaNacimientoStr = scanner.nextLine();
+
+                    try {
+                        Date fechaNacimiento = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimientoStr);
+                        Cliente nuevoCliente = new Cliente(identificacion, nombre, apellido, direccion, telefono, tipo, fechaNacimiento);
+                        clientes.add(nuevoCliente);
+                        System.out.println("Cliente ingresado correctamente.");
+                    } catch (Exception e) {
+                        System.out.println("Error al ingresar la fecha de nacimiento. Intente nuevamente.");
+                        break;
+                    }
                     break;
                 case 2:
-                    clienteManager.mostrarTodosLosClientes(clientes);
+                    Cliente.mostrarTodosLosClientes(clientes);
                     break;
                 case 3:
-                    clienteManager.mostrarClienteDeMenorEdad(clientes);
+                    Cliente.mostrarClienteDeMenorEdad(clientes);
                     break;
                 case 4:
-                    clienteManager.mostrarClienteConMasDeUnPaciente(clientes,pacientes);
+                    Cliente.mostrarClienteConMasDeUnPaciente(clientes,pacientes);
                     break;
                 case 5:
-                    clienteManager.mostrarCantidadDeClientesPorTipo(clientes);
+                    Cliente.mostrarCantidadDeClientesPorTipo(clientes);
                     break;
                 case 6:
                     System.out.println("Adiós!");
                     break;
                 case 7:
-                    clienteManager.mostrarClientesOrdenadosPorPacientes(clientes);
+                    Cliente.mostrarClientesOrdenadosPorPacientes(clientes,pacientes);
                     break;
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
